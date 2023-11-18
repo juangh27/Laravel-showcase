@@ -3,7 +3,7 @@ version: '3.8'
 services:
   db:
     image: mariadb:11.1.2
-    container_name: mdb
+    container_name: mdbs
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
@@ -12,11 +12,13 @@ services:
       MYSQL_USER: ${MARIADB_USER}
     volumes:
       - mariadb-data:/var/lib/mysql
+      # - ./mariadb/my.cnf:/etc/mysql/my.cnf   # Add this line
     ports:
-      - '3311:3306'
+      - '3312:3306'
+    
 
   php-apache:
-    container_name: php-apache
+    container_name: php-showcase
     build:
       context: ./php
     ports:
